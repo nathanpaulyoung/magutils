@@ -81,7 +81,7 @@ type Mag struct {
 	pow     float64
 	dex     float64
 	mind    float64
-	pb1     string
-	pb2     string
-	pb3     string
+	pb1     blast
+	pb2     blast
+	pb3     blast
 }

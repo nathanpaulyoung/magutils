@@ -1,9 +1,22 @@
 package magutils
 
+type blast string
+
+//Constant identifiers for each Photon Blast for use in the SetPB function.
+const (
+	None        blast = "none"
+	Estlla      blast = "Estlla"
+	Leilla      blast = "Leilla"
+	Farlla      blast = "Farlla"
+	Pilla       blast = "Pilla"
+	Golla       blast = "Golla"
+	Myllayoulla blast = "Mylla & Youlla"
+)
+
 type magSpecies struct {
 	name       string
 	group      magGroup
-	pb         string
+	pb         blast
 	actBarFill string
 	actTenthHP string
 	actDeath   string

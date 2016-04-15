@@ -1,35 +1,58 @@
-#**MagUtils** - a library for computing PSOBB mag growth and evolution
+# **MagUtils** - *a library for computing PSOBB Mag growth and evolution*
 
-##**Functions:**
+## **History**
 
-###`func NewMag() *Mag`
-`NewMag` returns a pointer to a fully initialized basic (or "baby") Mag, with Defense set to 0, Synchro set to 20, and all other stats set at zero.
+Sonic Team's *Phantasy Star Online* is a game beloved by many across many different platforms, including Dreamcast (twice), Gamecube, Xbox, and PC (also twice). The latest iteration of the game, *Phantasy Star Online: Blue Burst* was released on PC during the Summer of 2005, and although SEGA shut down the official servers in early 2008, players have kept the game and community alive with a number of [Fan Servers](http://ephinea.pioneer2.net) running open source server software, and playing home to thousands of players who still love this game to this day.
 
-###`func (mag *Mag) Feed(n int, i items, s sectionid, c class)`
-`Feed` feeds a food item `i` to an initialized Mag and processes evolution based on SectionID `s` and Class `c` when correct conditions are met. Supports feeding `n` multiples of an item in one function call.
+One aspect of PSOBB that is often quite challenging to handle is the highly mathematical and complex system behind Mags, small companion pets that float behind your character providing stat bonuses and powerful abilities during battle. Mags can be fed items from the player's inventory and will gain stats and abilities, level up, and evolve over the course of their growth. Figuring out how your Mag will grow from a given item or at a given stage of their development can be *very* challenging, with many players taking the time to scour the internet for elaborate tables of stat gains and trees detailing evolutionary conditions.
 
-**Values for `i`:**  
+**MagUtils is a library designed to supplement or replace this process, making it clear and easy how Mag growth and evolution works and will progress, and guiding players toward a perfect Mag.**
+
+*If you are interested in joining the PSOBB community, head over to [Ephinea PSOBB](http://ephinea.pioneer2.net) and check them out. They never accept money for any reason, and are very true to the official SEGA servers!*
+
+***
+## **Functions:**
+
+#### `func NewMag() *Mag`
+* `NewMag` returns a pointer to a fully initialized basic (or "baby") Mag, with Defense set to 0, Synchro set to 20, and all other stats set at zero.
+
+#### `func (mag *Mag) Feed(n int, i items, s sectionid, c class)`
+* `Feed` feeds a food item `i` to an initialized Mag and processes evolution based on SectionID `s` and Class `c` when correct conditions are met. Supports feeding `n` multiples of an item in one function call.
+
+* Values for `i`:  
 `Monomate`, `Dimate`, `Trimate`, `Monofluid`, `Difluid`, `Trifluid`, `Antidote`, `Antiparalysis`, `Solatomizer`, `Moonatomizer`, `Staratomizer`
 
-**Values for `s`:**  
+* Values for `s`:  
 `Viridia`, `Greenill`, `Skyly`, `Bluefull`, `Purplenum`, `Pinkal`, `Redria`, `Oran`, `Yellowboze`, `Whitill`
 
-**Values for `c`:**  
+* Values for `c`:  
 `Humar`, `Hunewearl`, `Hucast`, `Hucaseal`, `Ramar`, `Ramarl`, `Racast`, `Racaseal`, `Fomar`, `Fomarl`, `Fonewm`, `Fonewearl`
 
-###`func (mag *Mag) Evolve(s sectionid, c class)`
-`Evolve` is called by `Feed` automatically, but may be called independently on a properly initialized mag to process evolution based on SectionID `s` and Class `c` when correct conditions are met.
+#### `func (mag *Mag) Evolve(s sectionid, c class)`
+* `Evolve` is called by `Feed` automatically, but may be called independently on a properly initialized mag to process evolution based on SectionID `s` and Class `c` when correct conditions are met.
 
-**Values for `s`:**  
+* Values for `s`:  
 `Viridia`, `Greenill`, `Skyly`, `Bluefull`, `Purplenum`, `Pinkal`, `Redria`, `Oran`, `Yellowboze`, `Whitill`
 
-**Values for `c`:**  
+* Values for `c`:  
 `Humar`, `Hunewearl`, `Hucast`, `Hucaseal`, `Ramar`, `Ramarl`, `Racast`, `Racaseal`, `Fomar`, `Fomarl`, `Fonewm`, `Fonewearl`
 
-###`func (mag *Mag) SetStats(sync int, iq int, def float64, pow float64, dex float64, mind float64)`
-`SetStats` should never NEED to be used, unless you want to allow sandbox testing of mags, or the ability to save/import mags.
+#### `func (mag *Mag) SetStats(sync int, iq int, def float64, pow float64, dex float64, mind float64) (syncerr bool, iqerr bool, staterr bool)`
+* `SetStats` should never NEED to be used, unless you want to allow sandbox testing of mags, or the ability to save/import mags. Returns three bools representing success or failure.
 
-##**Mag Object Properties**
+#### `func (mag *Mag) SetPB(pb blast, pos int)`
+* `SetPB` is, again, just for sandboxing or importing mags.
+
+* Values for `pb`:  
+`None`, `Estlla`, `Leilla`, `Farlla`, `Pilla`, `Golla`, `Myllayoulla`
+
+#### `func (mag *Mag) SetSpecies(species mags)`
+* `SetSpecies` is still just for sandboxing or importing mags.
+
+* Values for `species`:  
+`BasicMag`, `Agastya`, `Andhaka`, `Apsaras`, `Ashvinau`, `Bana`, `Bhima`, `Bhirava`, `Chao`, `Chuchu`, `Churel`, `Deva`, `Diwari`, `Durga`, `Gaelgill`, `Garuda`, `Geungsi`, `Ila`, `Kabanda`, `Kaitabha`, `Kalki`, `Kama`, `Kapukapu`, `Kumara`, `Madhu`, `Marica`, `Marutah`, `Mitra`, `Moro`, `Naga`, `Namuci`, `Nandin`, `Naraka`, `Nidra`, `Opaopa`, `Pian`, `Pioneer2`, `Pitri`, `Preta`, `Pushan`, `Puyo`, `Rappy`, `Rati`, `Ravana`, `Ribhava`, `Robochao`, `Rudra`, `Rukmin`, `Sato`, `Savitri`, `Sita`, `Soma`, `Soniti`, `Strikerunit`, `Sumba`, `Surya`, `Tapas`, `Tellusis`, `Ushasu`, `Varaha`, `Varuna`, `Vayu`, `Vritra`, `Yahoo`, `Yaksa`
+
+## **Mag Object Properties**
 * `mag.species.name`  
 *The name of the mag's current species.*
 * `mag.species.group.name`  
@@ -81,7 +104,7 @@
 * `mag.pb3`  
 *The mag's third (red) Photon Blast, granted by mag.species.pb3 in Evolve function.*
 
-##**Usage Example:**
+## **Usage Example:**
 `mag := NewMag()`  
 `mag.Feed(13, Antidote, Purplenum, Racast)`  
 `println(mag.species.name)`
@@ -89,8 +112,8 @@
 Will output:  
 `Kalki`
 
-##**To do:**
-* Finish funcSetMagParams.go
+## **To do:**
+* ~~Finish funcSetMagParams.go~~
 * Make `Feed` return `true` on evolution and `false` on no evolution.
 * Make `Feed` break on evolution and return text indicating how many items were fed.
 * Implement feed/evolution history.
