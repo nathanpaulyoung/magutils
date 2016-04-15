@@ -90,6 +90,7 @@ Will output:
 `Kalki`
 
 ##**To do:**
+* Finish funcSetMagParams.go
 * Make `Feed` return `true` on evolution and `false` on no evolution.
 * Make `Feed` break on evolution and return text indicating how many items were fed.
 * Implement feed/evolution history.
