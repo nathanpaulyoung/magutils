@@ -14,7 +14,7 @@ One aspect of PSOBB that is often quite challenging to handle is the highly math
 ## **Functions:**
 
 #### `func NewMag() *Mag`
-* `NewMag` returns a pointer to a fully initialized basic (or "baby") Mag, with Defense set to 0, Synchro set to 20, and all other stats set at zero.
+* `NewMag` returns a pointer to a fully initialized basic (or "baby") Mag, with Defense set to 5, Synchro set to 20, and all other stats set at zero.
 
 #### `func (mag *Mag) Feed(n int, i items, s sectionid, c class)`
 * `Feed` feeds a food item `i` to an initialized Mag and processes evolution based on SectionID `s` and Class `c` when correct conditions are met. Supports feeding `n` multiples of an item in one function call.
